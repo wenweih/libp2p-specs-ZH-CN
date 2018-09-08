@@ -33,7 +33,7 @@
 - [1 介绍](1-introduction.md)
   - [1.1 动因](1-introduction.md#11-motivation)
   - [1.2 目标](1-introduction.md#12-goals)
-- [2 分析网络堆栈 (network stack) 的最新技术](2-state-of-the-art.md)
+- [2 分析网络堆栈 (network stack) 的技术现状](2-state-of-the-art.md)
   - [2.1 客户端-服务端模型](2-state-of-the-art.md#21-the-client-server-model)
   - [2.2 按解决方案对网络堆栈协议分类](2-state-of-the-art.md#22-categorizing-the-network-stack-protocols-by-solutions)
   - [2.3 当前缺陷](2-state-of-the-art.md#23-current-shortcomings)

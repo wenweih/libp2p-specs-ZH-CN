@@ -1,30 +1,25 @@
-1 Introduction
+1 介绍
 ==============
+开发 [IPFS-星际文件系统（去中心化的分布式文件系统）](https://ipfs.io/)过程中，在网络设备多样性、拓扑网络结构和功能差异化大的环境下运行一个分布式文件系统将会面临不少挑战。在此过程中，我们不得不重新审视整个协议中网络堆栈 (network stack) 设计，该规格阐述多层设计和协议的设计准则的解决方案，并且保证兼容已有的主流技术和未来的技术创新。
 
-While developing [IPFS, the InterPlanetary FileSystem](https://ipfs.io/), we came to learn about several challenges imposed by having to run a distributed file system on top of heterogeneous devices, with different network setups and capabilities. During this process, we had to revisit the whole network stack and elaborate solutions to overcome the obstacles imposed by design decisions of the several layers and protocols, without breaking compatibility or recreating technologies.
+为了开发这个库，我们独立地专注在去中心化解决分布式文件系统网络层面涉及到的问题；尽可能不引入复杂的解决方案，强调通过高度抽象化；外部系统集成 libp2p 库时，提供一个完全可用的点对点的分布式应用运行环境。
 
-In order to build this library, we focused on tackling problems independently, creating less complex solutions with powerful abstractions that, when composed, can offer an environment for a peer-to-peer application to work successfully.
+## 1.1 动因
+`libp2p` 是我们团队开发分布式系统经验的结晶。不基于任何具体化的网络环境和拓扑结构为前提，通用接口抽象化，开发者可根据应用实际场景选择他们偏好的网络技术栈开发出理想的点对点应用交互程序。
 
-## 1.1 Motivation
-
-`libp2p` is the result of our collective experience of building a distributed system, in that it puts responsibility on developers to decide how they want an app to interoperate with others in the network, and favors configuration and extensibility instead of making assumptions about the network setup.
-
-In essence, a peer using `libp2p` should be able to communicate with another peer using a variety of different transports, including connection relay, and talk over different protocols, negotiated on demand.
-
-## 1.2 Goals
-
-Our goals for the `libp2p` specification and its implementations are:
-
-  - Enable the use of various:
-    - transports: TCP, UDP, SCTP, UDT, uTP, QUIC, SSH, etc.
-    - authenticated transports: TLS, DTLS, CurveCP, SSH
-  - Make efficient use of sockets (connection reuse)
-  - Enable communications between peers to be multiplexed over one socket (avoiding handshake overhead)
-  - Enable multiprotocols and respective versions to be used between peers, using a negotiation process
-  - Be backwards compatible
-  - Work in current systems
-  - Use the full capabilities of current network technologies
-  - Have NAT traversal
-  - Enable connections to be relayed
-  - Enable encrypted channels
-  - Make efficient use of underlying transports (e.g. native stream muxing, native auth, etc.)
+一句话总结：集成 `libp2p` 的应用节点可无障碍地与使用任意不同传输方式 (transports) 的节点进行通信，其中包含了连接层 (connection relay) 不同和协议不同。
+## 1.2 目标
+`libp2p` 规格书和实现的目标：
+- 兼容多种协议
+  - 传输协议：TCP, UDP, SCTP, UDT, uTP, QUIC, SSH 等
+  - 认证加密传输：TLS, DTLS, CurveCP, SSH
+- 充分利用套接字 (连接复用)
+- 在一个 socket 上允许节点间多路复用通信（减少握手连接频繁）
+- 允许节点间使用不同的协议类型或者不同版本类型通信
+- 向后兼容
+- 兼容当前主流分布式网络系统结构
+- 充分利用当前网络技术
+- NAT 穿透
+- 允许连接被转发
+- 允许加密通道 (encrypted channels)
+- 有效利用底层传输  (e.g. native stream muxing, native auth, etc.)
